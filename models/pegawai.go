@@ -43,15 +43,31 @@ func FetchAllPegawai() (Response, error) {
 
 	return res, nil
 }
+
+func StorePegawai(nama, alamat, telepon string) (Response, error) {
+	var res Response
+
+	con := db.CreateCon()
+	sqlStatement := "INSERT pegawai (nama, alamat, telepon) VALUES (?,?,?)"
+	sql, err := con.Prepare(sqlStatement)
 	if err != nil {
 		return res, err
 	}
 
-	arrobj = append(arrobj, obj)
+	result, err := sql.Exec(nama, alamat, telepon)
+	if err != nil {
+		return res, err
+	}
 
+	lii, err := result.LastInsertId()
+	if err != nil {
+		return res, err
+	}
 	res.Status = http.StatusOK
 	res.Message = "Success"
-	res.Data = arrobj
+	res.Data = map[string]int64{
+		"last_intesert_id": lii,
+	}
 
 	return res, nil
 }
