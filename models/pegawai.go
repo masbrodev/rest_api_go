@@ -29,8 +29,20 @@ func FetchAllPegawai() (Response, error) {
 
 	for rows.Next() {
 		err = rows.Scan(&obj.Id, &obj.Nama, &obj.Alamat, &obj.Telepon)
+
+		if err != nil {
+			return res, err
+		}
+
+		arrobj = append(arrobj, obj)
 	}
 
+	res.Status = http.StatusOK
+	res.Message = "Success"
+	res.Data = arrobj
+
+	return res, nil
+}
 	if err != nil {
 		return res, err
 	}
