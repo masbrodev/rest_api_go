@@ -2,6 +2,7 @@ package routes
 
 import (
 	"net/http"
+	"rest_api/controllers"
 
 	"github.com/labstack/echo/v4"
 )
@@ -13,6 +14,9 @@ func Init() *echo.Echo {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World22!")
 	})
+
+	e.GET("/pegawai", controllers.FetchAllPegawai)
+	e.POST("/pegawai", controllers.StorePegawai)
 
 	return e
 }
