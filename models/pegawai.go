@@ -77,9 +77,10 @@ func UpdatePegawai(id int, nama, alamat, telepon string) (Response, error) {
 
 	con := db.CreateCon()
 
-	sqlStatement := "UPDATE pegawai SET nama = ?, alamat = ?, telepon, WHERE id = ?"
+	sqlStatement := "UPDATE pegawai SET nama = ?, alamat = ?, telepon = ? WHERE id = ?"
+
 	sql, err := con.Prepare(sqlStatement)
-	if sql != nil {
+	if err != nil {
 		return res, err
 	}
 
