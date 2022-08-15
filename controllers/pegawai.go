@@ -47,3 +47,19 @@ func UpdatePegawai(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, result)
 }
+
+func DeletePegwai(c echo.Context) error {
+	id := c.FormValue("id")
+
+	convId, err := strconv.Atoi(id)
+
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	result, err := models.DeletePegwai(convId)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+	return c.JSON(http.StatusOK, result)
+}
