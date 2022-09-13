@@ -29,5 +29,6 @@ func Init() *echo.Echo {
 
 	e.POST("/login", controllers.CheckLogin)
 	e.GET("/generate-hash/:password", controllers.GenerateHashPassword)
+	// e.GET("/validation-test", controllers.TestStructValidation)
 	return e
 }
